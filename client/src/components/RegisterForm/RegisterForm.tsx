@@ -2,14 +2,26 @@ import { FormField } from '../FormField';
 import { Button } from '../Button';
 import './RegisterForm.css';
 import { FC, FormEventHandler, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { registerUser } from '../../api/User';
+import { queryClient } from '../../api/queryClient';
 
 export const RegisterForm: FC = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const registerUserMutation = useMutation(
+    {
+      mutationFn: () => registerUser(email, username, password),
+    },
+    queryClient,
+  );
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    registerUserMutation.mutate();
   };
 
   return (
@@ -44,7 +56,14 @@ export const RegisterForm: FC = () => {
           value={password}
         />
       </FormField>
-      <Button type="submit">Зарегистрироваться</Button>
+
+      {registerUserMutation.error && (
+        <span>{registerUserMutation.error.message}</span>
+      )}
+
+      <Button type="submit" isLoading={registerUserMutation.isPending}>
+        Зарегистрироваться
+      </Button>
     </form>
   );
 };
