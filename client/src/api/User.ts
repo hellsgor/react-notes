@@ -11,3 +11,13 @@ export function registerUser(
     body: JSON.stringify({ email, username, password }),
   }).then(() => undefined);
 }
+
+export function loginUser(email: string, password: string): Promise<void> {
+  return fetch('/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  }).then(() => undefined);
+}
