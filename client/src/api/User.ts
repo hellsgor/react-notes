@@ -1,4 +1,13 @@
 import { validateResponse } from './validateResponse';
+import { z } from 'zod';
+
+export const UserSchema = z.object({
+  id: z.string(),
+  email: z.string(),
+  username: z.string(),
+});
+
+export type User = z.infer<typeof UserSchema>;
 
 export function registerUser(
   email: string,
@@ -24,4 +33,11 @@ export function loginUser(email: string, password: string): Promise<void> {
   })
     .then(validateResponse)
     .then(() => undefined);
+}
+
+export function fetchMe(): Promise<User> {
+  return fetch('/api/users/me')
+    .then(validateResponse)
+    .then((response) => response.json())
+    .then((data) => UserSchema.parse(data));
 }
