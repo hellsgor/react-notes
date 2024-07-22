@@ -12,9 +12,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const RegistrationUserSchema = z.object({
   username: z
     .string()
-    .min(4, 'Имя пользователя не может быть короче 4 символов'),
+    .min(5, 'Имя пользователя не может быть короче 5 символов'),
   email: z.string().email('Некорректный email'),
-  password: z.string().min(6, 'Пароль не может быть короче 6 символов'),
+  password: z.string().min(8, 'Пароль не может быть короче 8 символов'),
 });
 
 type RegistrationUserForm = z.infer<typeof RegistrationUserSchema>;
