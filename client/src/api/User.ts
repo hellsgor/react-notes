@@ -1,3 +1,5 @@
+import { validateResponse } from './validateResponse';
+
 export function registerUser(
   email: string,
   username: string,
@@ -19,5 +21,7 @@ export function loginUser(email: string, password: string): Promise<void> {
       'Content-type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  }).then(() => undefined);
+  })
+    .then(validateResponse)
+    .then(() => undefined);
 }
