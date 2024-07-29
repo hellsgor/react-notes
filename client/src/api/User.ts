@@ -41,3 +41,12 @@ export function fetchMe(): Promise<User> {
     .then((response) => response.json())
     .then((data) => UserSchema.parse(data));
 }
+
+export function logoutUser(): Promise<void> {
+  return fetch('/api/logout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then(() => validateResponse)
+    .then(() => undefined);
+}
