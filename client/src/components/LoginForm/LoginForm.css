@@ -4,3 +4,8 @@
   align-items: stretch;
   gap: 16px;
 }
+
+.login-form__error {
+  color: var(--error); 
+  font-size: 12px; 
+}
