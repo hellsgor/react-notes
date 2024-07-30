@@ -2,12 +2,13 @@ import './LoginForm.css';
 import { FormField } from '../FormField';
 import { Button } from '../Button';
 import { z } from 'zod';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../api/queryClient';
 import { loginUser } from '../../api/User';
+import { useErrorVisibility } from '../../hooks/useErrorVisibility';
 
 const LoginUserSchema = z.object({
   email: z
@@ -20,6 +21,10 @@ const LoginUserSchema = z.object({
 type LoginUserForm = z.infer<typeof LoginUserSchema>;
 
 export const LoginForm: FC = () => {
+  const serverErrorRef = useRef<HTMLSpanElement | null>(null);
+
+  const [errorVisible, hideError, showError] = useErrorVisibility();
+
   const {
     register,
     handleSubmit,
@@ -43,7 +48,9 @@ export const LoginForm: FC = () => {
       className="login-form"
       onSubmit={handleSubmit(({ email, password }) => {
         loginUserMutation.mutate({ email, password });
+        showError();
       })}
+      onFocus={hideError}
     >
       <FormField label="Email" errorMessage={errors.email?.message}>
         <input {...register('email')} type="text" inputMode="email" />
@@ -53,8 +60,10 @@ export const LoginForm: FC = () => {
         <input {...register('password')} type="password" />
       </FormField>
 
-      {loginUserMutation.error && (
-        <span>{loginUserMutation.error.message}</span>
+      {errorVisible && loginUserMutation.error && (
+        <span ref={serverErrorRef} className="login-form__error">
+          {loginUserMutation.error.message}
+        </span>
       )}
 
       <Button type="submit" isLoading={loginUserMutation.isPending}>
