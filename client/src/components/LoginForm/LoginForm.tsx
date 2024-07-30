@@ -50,9 +50,7 @@ export const LoginForm: FC = () => {
         loginUserMutation.mutate({ email, password });
         showError();
       })}
-      onFocus={() => {
-        hideError();
-      }}
+      onFocus={hideError}
     >
       <FormField label="Email" errorMessage={errors.email?.message}>
         <input {...register('email')} type="text" inputMode="email" />
