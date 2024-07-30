@@ -1,6 +1,11 @@
-export async function validateResponse(response: Response): Promise<Response> {
+import { getErrorMessage } from './getErrorMessage';
+
+export async function validateResponse(
+  response: Response,
+  isHandle: boolean = false,
+): Promise<Response> {
   if (!response.ok) {
-    throw new Error(await response.text());
+    throw new Error(await getErrorMessage(response, isHandle));
   }
 
   return response;
