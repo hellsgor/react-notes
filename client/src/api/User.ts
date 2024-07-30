@@ -49,6 +49,6 @@ export function logoutUser(): Promise<void> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   })
-    .then(() => validateResponse)
+    .then((response) => validateResponse(response, true))
     .then(() => undefined);
 }
