@@ -2,4 +2,12 @@
     position: fixed;
     right: 4px;
     top: 16px;
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+}
+
+.logout-button__error {
+  font-style: 8px;
+  color: var(--error);
 }
