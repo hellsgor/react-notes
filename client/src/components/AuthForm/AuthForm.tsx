@@ -1,16 +1,14 @@
-import { useState } from 'react';
 import { LoginForm } from '../LoginForm';
 import { RegisterForm } from '../RegisterForm';
 
 import './AuthForm.css';
+import { useAuthType } from '../../hooks/useAuthType';
 
 export const AuthForm = () => {
-  const [authType, setAuthType] = useState<string>('register');
+  const { authType, switchAuthType } = useAuthType('register');
 
   const handleClick = () => {
-    setAuthType((prevState) =>
-      prevState === 'register' ? 'auth' : 'register',
-    );
+    switchAuthType();
   };
 
   return (
