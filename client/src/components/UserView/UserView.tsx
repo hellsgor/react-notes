@@ -1,8 +1,10 @@
-import "./UserView.css";
+import { FC } from 'react';
+import { User } from '../../api/User';
+import './UserView.css';
 
-export const UserView = () => {
-  const username = "Firstname Lastname";
+interface UserViewProps extends Pick<User, 'username'> {}
 
+export const UserView: FC<UserViewProps> = ({ username }) => {
   return (
     <div className="user-view">
       <div className="user-view__logo">

@@ -11,13 +11,26 @@ export function Account() {
     {
       queryFn: () => fetchMe(),
       queryKey: ['users', 'me'],
+      retry: 0,
     },
     queryClient,
   );
 
   switch (meQuery.status) {
     case 'pending':
-      return <Loader />;
+      return (
+        <div
+          style={{
+            width: '100vw',
+            height: '100dvh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Loader />
+        </div>
+      );
 
     case 'error':
       return <AuthForm />;
@@ -25,7 +38,7 @@ export function Account() {
     case 'success':
       return (
         <>
-          <UserView />
+          <UserView username={meQuery.data.username} />
           <LogoutButton />
         </>
       );
