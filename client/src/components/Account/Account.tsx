@@ -25,7 +25,7 @@ export function Account() {
     case 'success':
       return (
         <>
-          <UserView />
+          <UserView username={meQuery.data.username} />
           <LogoutButton />
         </>
       );
