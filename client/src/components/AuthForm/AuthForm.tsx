@@ -3,9 +3,10 @@ import { RegisterForm } from '../RegisterForm';
 
 import './AuthForm.css';
 import { useAuthType } from '../../hooks/useAuthType';
+import { FC } from 'react';
 
-export const AuthForm = () => {
-  const { authType, switchAuthType } = useAuthType('register');
+export const AuthForm: FC = () => {
+  const { authType, setAuthType, switchAuthType } = useAuthType('register');
 
   const handleClick = () => {
     switchAuthType();
@@ -16,7 +17,11 @@ export const AuthForm = () => {
       <p className="auth-form__title">
         {authType === 'register' ? 'Регистрация' : 'Авторизация'}
       </p>
-      {authType === 'register' ? <RegisterForm /> : <LoginForm />}
+      {authType === 'register' ? (
+        <RegisterForm setAuthType={setAuthType} />
+      ) : (
+        <LoginForm />
+      )}
       <div className="auth-form__info">
         <span>
           {authType === 'register' ? 'Уже есть аккаунт?' : 'Ещё нет аккаунта?'}
