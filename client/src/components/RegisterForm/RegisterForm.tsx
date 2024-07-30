@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useErrorVisibility } from '../../hooks/useErrorVisibility';
+import { AuthType } from '../../hooks/useAuthType';
 
 const RegistrationUserSchema = z.object({
   username: z
@@ -20,7 +21,11 @@ const RegistrationUserSchema = z.object({
 
 type RegistrationUserForm = z.infer<typeof RegistrationUserSchema>;
 
-export const RegisterForm: FC = () => {
+interface RegisterFormProps {
+  setAuthType: (value: AuthType) => void;
+}
+
+export const RegisterForm: FC<RegisterFormProps> = ({ setAuthType }) => {
   const serverErrorRef = useRef<HTMLSpanElement | null>(null);
 
   const [errorVisible, hideError, showError] = useErrorVisibility();
@@ -37,6 +42,9 @@ export const RegisterForm: FC = () => {
     {
       mutationFn: (data: RegistrationUserForm) =>
         registerUser(data.email, data.username, data.password),
+      onSuccess() {
+        setAuthType('auth');
+      },
     },
     queryClient,
   );
