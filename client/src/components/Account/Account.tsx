@@ -18,7 +18,19 @@ export function Account() {
 
   switch (meQuery.status) {
     case 'pending':
-      return <Loader />;
+      return (
+        <div
+          style={{
+            width: '100vw',
+            height: '100dvh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Loader />
+        </div>
+      );
 
     case 'error':
       return <AuthForm />;
