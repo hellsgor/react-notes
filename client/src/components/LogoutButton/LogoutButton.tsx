@@ -17,6 +17,12 @@ export const LogoutButton = () => {
 
   return (
     <div className="logout-button">
+      {logoutUserMutation.error && (
+        <span className="logout-button__error">
+          {logoutUserMutation.error.message}
+        </span>
+      )}
+
       <Button
         type="button"
         onClick={() => logoutUserMutation.mutate()}
