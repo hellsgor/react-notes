@@ -5,3 +5,8 @@
 
   gap: 16px;
 }
+
+.register-form__error {
+  color: var(--error); 
+  font-size: 12px; 
+}
