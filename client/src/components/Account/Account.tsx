@@ -11,6 +11,7 @@ export function Account() {
     {
       queryFn: () => fetchMe(),
       queryKey: ['users', 'me'],
+      retry: 0,
     },
     queryClient,
   );
