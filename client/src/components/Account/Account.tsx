@@ -16,11 +16,10 @@ export const Account: FC<AccountProps> = ({ meQuery }) => {
       return (
         <div
           style={{
-            width: '100vw',
-            height: '100dvh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            translate: '-50%, -50%',
           }}
         >
           <Loader />
