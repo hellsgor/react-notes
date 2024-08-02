@@ -33,6 +33,6 @@ export const FetchNotesListView: FC = () => {
       return <span>Что-то пошло не так</span>;
 
     case 'success':
-      return <NotesListView />;
+      return <NotesListView notesList={notesQuery.data.list} />;
   }
 };
