@@ -32,7 +32,7 @@ export function getNotes(): Promise<NotesResponse> {
     .then((data) => NotesResponseSchema.parse(data));
 }
 
-export function createNote(title: string, text: string) {
+export function createNote(title: string, text: string): Promise<void> {
   return fetch('/api/notes', {
     method: 'POST',
     headers: {
@@ -41,5 +41,5 @@ export function createNote(title: string, text: string) {
     body: JSON.stringify({ title, text }),
   })
     .then((response) => validateResponse(response, true))
-    .then((data) => NewNoteSchema.parse(data));
+    .then(() => undefined);
 }
