@@ -12,3 +12,9 @@
   border-radius: 8px;
   align-self: flex-start;
 }
+
+.note-form__error {
+  color: var(--error); 
+  font-size: 12px; 
+  text-align: center;
+}
