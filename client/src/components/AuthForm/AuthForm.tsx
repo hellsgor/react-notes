@@ -6,7 +6,7 @@ import { useAuthType } from '../../hooks/useAuthType';
 import { FC } from 'react';
 
 export const AuthForm: FC = () => {
-  const { authType, setAuthType, switchAuthType } = useAuthType('register');
+  const { authType, switchAuthType } = useAuthType('register');
 
   const handleClick = () => {
     switchAuthType();
@@ -17,11 +17,7 @@ export const AuthForm: FC = () => {
       <p className="auth-form__title">
         {authType === 'register' ? 'Регистрация' : 'Авторизация'}
       </p>
-      {authType === 'register' ? (
-        <RegisterForm setAuthType={setAuthType} />
-      ) : (
-        <LoginForm />
-      )}
+      {authType === 'register' ? <RegisterForm /> : <LoginForm />}
       <div className="auth-form__info">
         <span>
           {authType === 'register' ? 'Уже есть аккаунт?' : 'Ещё нет аккаунта?'}
