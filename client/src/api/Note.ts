@@ -40,6 +40,6 @@ export function createNote(title: string, text: string): Promise<void> {
     },
     body: JSON.stringify({ title, text }),
   })
-    .then((response) => validateResponse(response, true))
+    .then(validateResponse)
     .then(() => undefined);
 }
