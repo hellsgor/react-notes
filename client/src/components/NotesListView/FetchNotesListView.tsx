@@ -4,6 +4,8 @@ import { FC } from 'react';
 import { useNotesQuery } from '../../hooks/useNotesQuery';
 import { UseQueryResult } from '@tanstack/react-query';
 import { NotesResponse } from '../../api/Note';
+import { User } from '../../api/User';
+import { queryClient } from '../../api/queryClient';
 
 export const FetchNotesListView: FC = () => {
   const notesQuery: UseQueryResult<NotesResponse> = useNotesQuery('/api/notes');
@@ -31,6 +33,18 @@ export const FetchNotesListView: FC = () => {
       );
 
     case 'success':
-      return <NotesListView notesList={notesQuery.data.list} />;
+      return (
+        <NotesListView
+          notesList={
+            notesQuery.data?.list.length
+              ? notesQuery.data.list.filter(
+                  (note) =>
+                    note.userId ===
+                    queryClient.getQueryData<User>(['users', 'me'])!.id,
+                )
+              : []
+          }
+        />
+      );
   }
 };
