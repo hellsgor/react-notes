@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import { validateResponse } from './validateResponse';
 
+export const NewNoteSchema = z.object({
+  title: z.string(),
+  text: z.string(),
+});
+export type NewNote = z.infer<typeof NewNoteSchema>;
+
 export const NoteSchema = z.object({
   id: z.string(),
   title: z.string(),
@@ -24,4 +30,16 @@ export function getNotes(): Promise<NotesResponse> {
     .then((response) => validateResponse(response, true))
     .then((response) => response.json())
     .then((data) => NotesResponseSchema.parse(data));
+}
+
+export function createNote(title: string, text: string): Promise<void> {
+  return fetch('/api/notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ title, text }),
+  })
+    .then((response) => validateResponse(response, true))
+    .then(() => undefined);
 }

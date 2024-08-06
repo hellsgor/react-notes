@@ -10,4 +10,12 @@
   max-width: 60%;
   width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.container form,
+.container ul {
+  width: 100%;
 }

@@ -1,5 +1,6 @@
 import './App.css';
 import { Account } from './components/Account/Account';
+import { NoteForm } from './components/NoteForm';
 import { FetchNotesListView } from './components/NotesListView/FetchNotesListView';
 import { useMeQuery } from './hooks/useMeQuery';
 
@@ -12,6 +13,7 @@ function App() {
 
       {meQuery.status === 'success' && (
         <div className="container">
+          <NoteForm />
           <FetchNotesListView />
         </div>
       )}
