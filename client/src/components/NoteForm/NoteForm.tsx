@@ -12,7 +12,7 @@ import { createNote } from '../../api/Note';
 
 const CreateNoteSchema = z.object({
   title: z.string().min(1, 'Поле не может быть пустым'),
-  text: z.string().min(1, 'Поле не может быть пустым'),
+  text: z.string().min(10, 'Длинна текста не может быть менее 10 символов'),
 });
 
 type CreateNoteForm = z.infer<typeof CreateNoteSchema>;
