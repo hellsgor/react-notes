@@ -11,8 +11,11 @@ import { queryClient } from '../../api/queryClient';
 import { createNote } from '../../api/Note';
 
 const CreateNoteSchema = z.object({
-  title: z.string().min(1, 'Поле не может быть пустым'),
-  text: z.string().min(10, 'Длинна текста не может быть менее 10 символов'),
+  title: z.string().min(5, 'Длинна заголовка не может быть менее 5 символов'),
+  text: z
+    .string()
+    .min(10, 'Длинна текста не может быть менее 10 символов')
+    .max(300, 'Длинна текста не может быть более 300 символов'),
 });
 
 type CreateNoteForm = z.infer<typeof CreateNoteSchema>;
