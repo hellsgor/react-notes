@@ -27,7 +27,7 @@ export type NotesResponse = z.infer<typeof NotesResponseSchema>;
 
 export function getNotes(): Promise<NotesResponse> {
   return fetch('/api/notes')
-    .then((response) => validateResponse(response, true))
+    .then(validateResponse)
     .then((response) => response.json())
     .then((data) => NotesResponseSchema.parse(data));
 }
