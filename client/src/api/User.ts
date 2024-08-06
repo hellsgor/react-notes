@@ -21,7 +21,7 @@ export function registerUser(
     },
     body: JSON.stringify({ email, username, password }),
   })
-    .then((response) => validateResponse(response, true))
+    .then(validateResponse)
     .then(() => undefined);
 }
 
@@ -49,6 +49,6 @@ export function logoutUser(): Promise<void> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
   })
-    .then((response) => validateResponse(response, true))
+    .then(validateResponse)
     .then(() => undefined);
 }

@@ -25,9 +25,9 @@ export const NotesResponseSchema = z.object({
 });
 export type NotesResponse = z.infer<typeof NotesResponseSchema>;
 
-export function getNotes(): Promise<NotesResponse> {
-  return fetch('/api/notes')
-    .then((response) => validateResponse(response, true))
+export function getNotes(url: string): Promise<NotesResponse> {
+  return fetch(url)
+    .then(validateResponse)
     .then((response) => response.json())
     .then((data) => NotesResponseSchema.parse(data));
 }
@@ -40,6 +40,6 @@ export function createNote(title: string, text: string): Promise<void> {
     },
     body: JSON.stringify({ title, text }),
   })
-    .then((response) => validateResponse(response, true))
+    .then(validateResponse)
     .then(() => undefined);
 }
