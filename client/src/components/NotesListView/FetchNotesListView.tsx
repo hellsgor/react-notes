@@ -6,7 +6,7 @@ import { UseQueryResult } from '@tanstack/react-query';
 import { NotesResponse } from '../../api/Note';
 
 export const FetchNotesListView: FC = () => {
-  const notesQuery: UseQueryResult<NotesResponse> = useNotesQuery();
+  const notesQuery: UseQueryResult<NotesResponse> = useNotesQuery('/api/notes');
 
   switch (notesQuery.status) {
     case 'pending':

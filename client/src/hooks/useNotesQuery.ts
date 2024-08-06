@@ -2,14 +2,12 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { getNotes, NotesResponse } from '../api/Note';
 import { queryClient } from '../api/queryClient';
 
-export function useNotesQuery(): UseQueryResult<NotesResponse> {
-  const notesQuery = useQuery(
+export function useNotesQuery(url: string): UseQueryResult<NotesResponse> {
+  return useQuery(
     {
-      queryFn: () => getNotes(),
+      queryFn: () => getNotes(url),
       queryKey: ['notes'],
     },
     queryClient,
   );
-
-  return notesQuery;
 }
