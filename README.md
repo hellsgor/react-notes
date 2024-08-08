@@ -5,7 +5,7 @@ The "Personal Notes" application from the React.js course by Skillbox.
 - [Client part](./client/README.md)
 - [Server part](./server/README.md)
 
-Пример отображения интерфейса приложения:
+An example of a display of the application interface:
 
 - [Authorization](./example/auth.jpg)
 - [List of notes](./example/noteList.jpg)
